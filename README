@@ -1,0 +1,21 @@
+Classes and tools for remote QtScript debugging
+
+This project needs to be compiled against the qt/master sources:
+http://qt.gitorious.org/qt/qt
+
+The classes need some symbols that are not exported by default from the
+QtScriptTools module in Qt. In order to export the necessary symbols, define
+QT_BUILD_INTERNAL before building QtScriptTools, for example by adding the
+following line to $QTDIR/src/scripttools/scripttools.pro:
+
+DEFINES += QT_BUILD_INTERNAL
+
+After QtScriptTools is built in this fashion, you should be able to run
+qmake && make in this project's top-level folder and everything should
+build and link. If you get a compile error saying that it can't find
+private/* headers, you're not compiling against the Qt _sources_ (you can't
+compile against an _installed_ Qt because private headers are not installed).
+
+An example debuggable application is provided in examples/debuggee.
+An example debugger is provided in examples/debugger.
+To try them, first start examples/debuggee, then start examples/debugger.
